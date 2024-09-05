@@ -7,114 +7,135 @@
         <title>Orpheus</title>
     </head>
     <body>
-        <div class="header">
-            <div class="container">
-                <div class="header__inner">
-                    <picture class="logo">
-                        <source srcset="assets/img/Logo.avif, assets/img/logo@2x.avif 2x, assets/img/Logo@3x.avif 3x" />
-                        <source srcset="assets/img/Logo.webp, assets/img/logo@2x.webp 2x, assets/img/Logo@3x.webp 3x" />
-                        <img src="assets/img/Logo.png" alt="logo" />
-                    </picture>
-                    <nav class="nav">
-                        <ul class="nav__list">
-                            <li class="nav__item"><a class="nav__link" href="#">About</a></li>
-                            <li class="nav__item"><a class="nav__link" href="#">Works</a></li>
-                            <li class="nav__item"><a class="nav__link" href="#">Contribution</a></li>
-                            <li class="nav__item"><a class="nav__link" href="#">Get in Touch</a></li>
-                        </ul>
-                        <button class="toggle-theme">
-                            <img src="assets/img/toggle-theme.svg" alt="toggle-theme" />
-                        </button>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <main class="main">
-            <section class="about">
+        <div class="body-inner">
+            <div class="header">
                 <div class="container">
-                    <div class="about__inner">
-                        <div class="about__content">
-                            <h1 class="about__title">Yet the story of <span>Orpheus</span></h1>
-                            <p class="about__text">
-                                Product & Graphic Designer, with experience in delivering end-to-end UX/UI design for
-                                software products.
-                            </p>
-                            <div class="about__box-links">
-                                <a class="about__link" href="#"
-                                    >Works
-                                    <svg
-                                        width="13"
-                                        height="8"
-                                        viewBox="0 0 13 8"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M1.25 1.375L6.5 6.625L11.75 1.375"
-                                            stroke="url(#paint0_linear_1158_155)"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        />
-                                        <defs>
-                                            <linearGradient
-                                                id="paint0_linear_1158_155"
-                                                x1="11.2868"
-                                                y1="6.31618"
-                                                x2="3.94086"
-                                                y2="-0.655189"
-                                                gradientUnits="userSpaceOnUse"
-                                            >
-                                                <stop stop-color="#FFE5A2" />
-                                                <stop offset="0.505208" stop-color="#BF841A" />
-                                                <stop offset="1" stop-color="#FFCD74" />
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-
-                                    <span class="about__link-border"></span>
-                                    <span class="about__link-border"></span>
-                                    <span class="about__link-border"></span>
-                                    <span class="about__link-border"></span>
-                                </a>
-                                <a class="about__link btn" href="#"><span>Free Stuff</span></a>
-                            </div>
-                        </div>
-                        <div class="statue">
-                            <picture class="statue__box">
+                    <div class="header__inner">
+                        <div class="header__content" id="menu">
+                            <picture class="logo">
                                 <source
                                     srcset="
-                                        assets/img/Statue.avif,
-                                        assets/img/Statue@2x.avif 2x,
-                                        assets/img/Statue@3x.avif 3x
+                                        assets/img/Logo.avif,
+                                        assets/img/logo@2x.avif 2x,
+                                        assets/img/Logo@3x.avif 3x
                                     "
                                 />
                                 <source
                                     srcset="
-                                        assets/img/Statue.webp,
-                                        assets/img/Statue@2x.webp 2x,
-                                        assets/img/Statue@3x.webp 3x
+                                        assets/img/Logo.webp,
+                                        assets/img/logo@2x.webp 2x,
+                                        assets/img/Logo@3x.webp 3x
                                     "
                                 />
-                                <img
-                                    src="assets/img/Statue.png"
-                                    alt="Statue skull. Gold marble. Roman-greeks culpture"
-                                />
+                                <img src="assets/img/Logo.png" alt="logo" />
                             </picture>
-                            <img class="statue__mask" src="assets/img/statue-mask.svg" alt="statue mask" />
-                            <div class="statue__border">
-                                <span class="statue__border-item"></span>
-                                <span class="statue__border-item"></span>
-                                <span class="statue__border-item"></span>
-                                <span class="statue__border-item"></span>
-                            </div>
+                            <nav class="nav">
+                                <ul class="nav__list">
+                                    <li class="nav__item"><a class="nav__link" href="#">About</a></li>
+                                    <li class="nav__item"><a class="nav__link" href="#">Works</a></li>
+                                    <li class="nav__item"><a class="nav__link" href="#">Contribution</a></li>
+                                    <li class="nav__item"><a class="nav__link" href="#">Get in Touch</a></li>
+                                </ul>
+                                <button class="toggle-theme">
+                                    <img src="assets/img/toggle-theme.svg" alt="toggle-theme" />
+                                </button>
+                            </nav>
                         </div>
-                        <div class="ellipse ellipse-left-center"></div>
-                        <div class="ellipse ellipse-top-right"></div>
+                        <div class="burger" id="burger">
+                            <div class="burger__line"></div>
+                            <div class="burger__line"></div>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </main>
+            </div>
+            <!-- <main class="main">
+                <section class="about">
+                    <div class="container">
+                        <div class="about__inner">
+                            <div class="about__content">
+                                <h1 class="about__title">Yet the story of <span>Orpheus</span></h1>
+                                <p class="about__text">
+                                    Product & Graphic Designer, with experience in delivering end-to-end UX/UI design for
+                                    software products.
+                                </p>
+                                <div class="about__box-links">
+                                    <a class="about__link" href="#"
+                                        >Works
+                                        <svg
+                                            width="13"
+                                            height="8"
+                                            viewBox="0 0 13 8"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M1.25 1.375L6.5 6.625L11.75 1.375"
+                                                stroke="url(#paint0_linear_1158_155)"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <defs>
+                                                <linearGradient
+                                                    id="paint0_linear_1158_155"
+                                                    x1="11.2868"
+                                                    y1="6.31618"
+                                                    x2="3.94086"
+                                                    y2="-0.655189"
+                                                    gradientUnits="userSpaceOnUse"
+                                                >
+                                                    <stop stop-color="#FFE5A2" />
+                                                    <stop offset="0.505208" stop-color="#BF841A" />
+                                                    <stop offset="1" stop-color="#FFCD74" />
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+    
+                                        <span class="about__link-border"></span>
+                                        <span class="about__link-border"></span>
+                                        <span class="about__link-border"></span>
+                                        <span class="about__link-border"></span>
+                                    </a>
+                                    <a class="about__link btn" href="#"><span>Free Stuff</span></a>
+                                </div>
+                            </div>
+                            <div class="statue">
+                                <picture class="statue__box">
+                                    <source
+                                        srcset="
+                                            assets/img/Statue.avif,
+                                            assets/img/Statue@2x.avif 2x,
+                                            assets/img/Statue@3x.avif 3x
+                                        "
+                                    />
+                                    <source
+                                        srcset="
+                                            assets/img/Statue.webp,
+                                            assets/img/Statue@2x.webp 2x,
+                                            assets/img/Statue@3x.webp 3x
+                                        "
+                                    />
+                                    <img
+                                        src="assets/img/Statue.png"
+                                        alt="Statue skull. Gold marble. Roman-greeks culpture"
+                                    />
+                                </picture>
+                                <img class="statue__mask" src="assets/img/statue-mask.svg" alt="statue mask" />
+                                <div class="statue__border">
+                                    <span class="statue__border-item"></span>
+                                    <span class="statue__border-item"></span>
+                                    <span class="statue__border-item"></span>
+                                    <span class="statue__border-item"></span>
+                                </div>
+                            </div>
+                            <div class="ellipse ellipse-left-center"></div>
+                            <div class="ellipse ellipse-top-right"></div>
+                        </div>
+                    </div>
+                </section>
+            </main> -->
+        </div>
+
         <script src="js/index.min.js"></script>
     </body>
 </html>
