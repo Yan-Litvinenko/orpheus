@@ -1,25 +1,24 @@
 :root {
     --main-text-color: #fff;
+    --button-text-color: #0a0d11;
     --main-background-color: #050607;
 
-    --precent-gradient-1: 62.65% 46.71% at 74.07% 12.71%;
-    --precent-gradient-2: 58.12% 110.04% at 46.74% -1.76%,
-    --color-gradient-1: rgba(143, 191, 253, 0.5);
-    --color-gradient-2: rgba(38, 72, 122, 0.6);
-    --color-gradient-3: rgba(15, 18, 24, 0);
+    --text-gradient: linear-gradient(295.38deg, #ffe5a2 4.89%, #bf841a 50.44%, #ffcd74 95.06%);
 
-    --gradient-1: radial-gradient(
-        var(--precent-gradient-1),
-        var(--color-gradient-1) 0%,
-        var(--color-gradient-2) 29.63%,
-        var(--color-gradient-3) 100%
-    );
-    --gradient-2: radial-gradient(
-        var(--precent-gradient-1),
-        var(--color-gradient-1) 0%,
-        var(--color-gradient-2) 29.63%,
-        var(--color-gradient-3) 100%
+    --bg-button-gradient: var(--text-gradient);
+    --bg-button-gradient-hover: linear-gradient(294.33deg, #ffe5a2 13.01%, #bf841a 68.95%, #ffcd74 123.74%);
+
+    --ellipse-gradient-1: radial-gradient(
+        58.92% 58.37% at 18.8% 75.16%,
+        rgba(60, 99, 128, 0.55) 0%,
+        rgba(25, 48, 83, 0.341) 29.63%,
+        rgba(15, 18, 24, 0) 100%
     );
 
-    --text-gradient: linear-gradient(295.38deg, #FFE5A2 4.89%, #BF841A 50.44%, #FFCD74 95.06%);
+    --ellipse-gradient-2: radial-gradient(
+        58.12% 110.04% at 46.74% -1.76%,
+        #3c6380 0%,
+        rgba(25, 48, 83, 0.62) 29.63%,
+        rgba(15, 18, 24, 0) 100%
+    );
 }

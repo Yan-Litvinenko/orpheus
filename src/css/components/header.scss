@@ -1,0 +1,47 @@
+.header {
+    border-bottom: 1px solid #101822;
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 23px;
+        height: 96px;
+    }
+}
+
+.logo {
+    display: flex;
+    align-items: flex-end;
+}
+
+.nav {
+    display: flex;
+    align-items: flex-end;
+    gap: 0px 54.5px;
+    margin-top: auto;
+    position: relative;
+    z-index: 2;
+
+    &__list {
+        display: flex;
+        align-items: flex-end;
+        gap: 0px 54.5px;
+    }
+
+    &__item {
+        font-family: Montserrat-500;
+        font-weight: 500;
+        line-height: 19.5px;
+        padding: 7px 9px 7px 9px;
+    }
+
+    &__link {
+        transition: all 0.3s;
+    }
+}
+
+@media (hover: hover) {
+    .nav__item:hover .nav__link {
+        text-shadow: 1px 1px 1px var(--main-text-color);
+    }
+}

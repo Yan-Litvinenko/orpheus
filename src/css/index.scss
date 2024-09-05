@@ -1,6 +1,9 @@
 @import './reset.scss';
 @import './variables.scss';
 @import './fonts.scss';
+@import './mixins.scss';
+@import './components/header.scss';
+@import './components/about.scss';
 
 *,
 *::before,
@@ -9,7 +12,96 @@
 }
 
 body {
+    background-color: var(--main-background-color);
+    color: var(--main-text-color);
     font-family: Montserrat-400;
     font-size: 16px;
     font-weight: 400;
+    line-height: normal;
+}
+
+a {
+    border-radius: 5px;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button {
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1536px;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.btn {
+    align-items: center;
+    background-image: var(--bg-button-gradient);
+    border-radius: 5px;
+    display: flex;
+    gap: 0px 8px;
+    height: 50px;
+    justify-content: center;
+    letter-spacing: -0.02em;
+    max-width: 170px;
+    overflow: hidden;
+    padding: 0px 15px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+}
+
+.btn > span {
+    color: var(--button-text-color);
+    font-family: Montserrat-500;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 50px;
+    position: relative;
+    z-index: 3;
+}
+
+.btn::before,
+.btn::after {
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: all 0.5s;
+    width: 100%;
+    z-index: 2;
+}
+
+.btn::before {
+    background-image: var(--bg-button-gradient);
+    opacity: 1;
+}
+
+.btn::after {
+    background-image: var(--bg-button-gradient-hover);
+    opacity: 0;
+}
+
+@media (hover: hover) {
+    .btn:hover::before {
+        opacity: 0;
+    }
+    .btn:hover::after {
+        opacity: 1;
+    }
 }

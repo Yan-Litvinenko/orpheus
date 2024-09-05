@@ -52,7 +52,7 @@ const watching = () => {
         },
     });
     watch(
-        ['src/css/*.{css,scss}'],
+        ['src/css/*.{css,scss}', 'src/css/*/*.{css,scss}'],
         series(styles, (done) => {
             browserSync.reload();
             done();
@@ -73,7 +73,7 @@ const watching = () => {
         }),
     );
     watch(
-        ['src/assets/images'],
+        ['src/assets/img'],
         series(images, (done) => {
             browserSync.reload();
             done();
@@ -86,19 +86,19 @@ const cleanDir = () => {
 };
 
 const images = () => {
-    return src(['src/assets/images/*.*', '!src/assets/images/*.svg'])
+    return src(['src/assets/img/*.*', '!src/assets/img/*.svg'])
         .pipe(newer('dist/assets/images'))
         .pipe(avif({ quality: 50 }))
 
         .pipe(src(['src/assets/images/*.*']))
-        .pipe(newer('dist/assets/images'))
+        .pipe(newer('dist/assets/img'))
         .pipe(webp())
 
         .pipe(src(['src/assets/images/*.*']))
-        .pipe(newer('dist/assets/images'))
+        .pipe(newer('dist/assets/img'))
         .pipe(imagemin())
 
-        .pipe(dest('dist/assets/images'));
+        .pipe(dest('dist/assets/img'));
 };
 
 const fonts = () => {
