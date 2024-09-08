@@ -5,6 +5,7 @@
 @import './components/header.scss';
 @import './components/about.scss';
 @import './components/works.scss';
+@import './components/contribution.scss';
 
 *,
 *::before,
@@ -70,7 +71,7 @@ ol {
     letter-spacing: -0.02em;
     max-width: 170px;
     overflow: hidden;
-    padding: 0px 15px;
+    padding: 0px 5px;
     position: relative;
     text-align: center;
     width: 100%;
