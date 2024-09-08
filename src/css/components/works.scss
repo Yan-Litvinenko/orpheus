@@ -139,28 +139,31 @@
         gap: 0;
     }
 
+    .works__inner {
+        margin-bottom: 60px;
+    }
+
     .card__title {
         font-size: 20px;
     }
 }
 
 @media (max-width: 500px) {
-    .works__header {
-        margin-bottom: 16px;
-        gap: 0;
-    }
-
     .card__title {
         font-size: 18px;
+    }
+
+    .works__link {
+        font-size: 14px;
     }
 }
 
 @media (max-width: 390px) {
-    .works__link {
+    .card__title {
         font-size: 14px;
     }
 
-    .card__title {
-        font-size: 14px;
+    .works__link {
+        font-size: 12px;
     }
 }

@@ -148,12 +148,18 @@ ol {
     }
 }
 
+@media (max-width: 500px) {
+    .title {
+        font-size: 24px;
+    }
+}
+
 @media (max-width: 390px) {
     .btn > span {
         font-size: 16px;
     }
 
     .title {
-        font-size: 22px;
+        font-size: 18px;
     }
 }
