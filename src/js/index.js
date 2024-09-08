@@ -11,30 +11,40 @@ const burger = () => {
 
 const slider = () => {
     const sliderInner = document.querySelector('.slider__inner');
-    const countCard = document.querySelectorAll('.card').length;
-
-    const transformValue = 35.11;
-    const transformValueMax = transformValue * (countCard - 3);
-    const ms = 5000;
+    const cards = document.querySelectorAll('.card');
+    const countCards = cards.length;
+    const ms = 4000;
 
     let acc = 0;
     let intervalId;
 
     const slide = () => {
+        const cardWidth = cards[0].offsetWidth;
+        const gap = Number(getComputedStyle(sliderInner).columnGap.replace('px', ''));
+        const mediaQuery = window.matchMedia('(max-width: 1050px)').matches;
+        const transformValue = cardWidth + gap;
+        const transformValueMax = transformValue * (mediaQuery ? countCards - 1 : countCards - 3);
+
         acc += transformValue;
 
         if (acc > transformValueMax) {
             acc = 0;
         }
 
-        sliderInner.style.transform = `translateX(-${acc}%)`;
+        sliderInner.style.transform = `translateX(-${acc}px)`;
     };
 
     const start = () => (intervalId = setInterval(slide, ms));
     const pause = () => clearInterval(intervalId);
+    const restart = () => {
+        sliderInner.style.transform = `translateX(-0px)`;
+        pause();
+        start();
+    };
 
     sliderInner.addEventListener('mouseover', pause);
     sliderInner.addEventListener('mouseout', start);
+    window.addEventListener('resize', restart);
 
     start();
 };

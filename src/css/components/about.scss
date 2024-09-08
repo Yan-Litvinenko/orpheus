@@ -366,6 +366,8 @@
     .about {
         &__inner {
             padding-top: 100px;
+            margin-bottom: 0;
+            height: max-content;
         }
 
         &__title {
@@ -381,6 +383,7 @@
 
         &__content {
             margin-top: 0px;
+            padding-bottom: 60px;
         }
 
         &__box-links {
