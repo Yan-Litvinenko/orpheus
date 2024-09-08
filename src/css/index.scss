@@ -4,6 +4,7 @@
 @import './mixins.scss';
 @import './components/header.scss';
 @import './components/about.scss';
+@import './components/works.scss';
 
 *,
 *::before,
@@ -106,6 +107,29 @@ ol {
 .btn::after {
     background-image: var(--bg-button-gradient-hover);
     opacity: 0;
+}
+
+.title {
+    @include text-gradient;
+    font-family: Montserrat-700;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 50px;
+    text-transform: uppercase;
+}
+
+.title-feature {
+    background-image: radial-gradient(
+        62.73% 1550% at 50% 700%,
+        rgba(242, 187, 90, 0.876812) 0%,
+        #ffe195 47.11%,
+        rgba(191, 122, 0, 0.75) 62.27%,
+        rgba(15, 18, 24, 0) 100%
+    );
+    height: 1px;
+    transform: rotate(90deg) translateX(60%);
+    width: 42px;
 }
 
 @media (hover: hover) {

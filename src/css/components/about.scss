@@ -96,11 +96,12 @@
         position: absolute;
         transition: all 0.5s;
         width: 100%;
+        z-index: 4;
     }
 
     &__link-border:nth-child(2) {
         left: 0;
-        top: 0;
+        top: 0px;
     }
 
     &__link-border:nth-child(2)::before {
@@ -144,7 +145,7 @@
 
     &__link-border:nth-child(5) {
         left: -25px;
-        top: 0;
+        top: 0px;
         transform: rotate(90deg) translateX(50%);
         width: 50px;
     }
