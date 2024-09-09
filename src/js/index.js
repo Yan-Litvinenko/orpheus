@@ -86,7 +86,6 @@ DOM_ELEMENTS.sliderInner.addEventListener('mouseover', pause);
 DOM_ELEMENTS.sliderInner.addEventListener('mouseout', start);
 DOM_ELEMENTS.burger.addEventListener('click', burger);
 window.addEventListener('resize', () => {
-    alert('resize');
     restart();
     updateSettingsSlider();
 });
@@ -116,6 +115,7 @@ function slide() {
 
     if (SLIDER_VALUE.elapsedMs >= SLIDER_SETTINGS.slideTime) {
         SLIDER_VALUE.acc += SLIDER_SETTINGS.transformValue();
+
         if (SLIDER_VALUE.acc > SLIDER_SETTINGS.transformValueMax()) {
             SLIDER_VALUE.acc = 0;
             alert(`acc(${SLIDER_VALUE.acc}) > max value(${SLIDER_SETTINGS.transformValueMax()})`);
@@ -123,18 +123,23 @@ function slide() {
 
         DOM_ELEMENTS.sliderInner.style.transform = `translateX(-${SLIDER_VALUE.acc}px)`;
         SLIDER_VALUE.elapsedMs = 0;
+
+        alert(`slide, transform: -${SLIDER_VALUE.acc}px`);
     }
 }
 
 function start() {
+    alert('start');
     pause();
     SLIDER_VALUE.intervalId = setInterval(slide, SLIDER_SETTINGS.step);
 }
 function pause() {
+    alert('pause');
     clearInterval(SLIDER_VALUE.intervalId);
 }
 
 function restart() {
+    alert('restart');
     SLIDER_VALUE.acc = 0;
     SLIDER_VALUE.elapsedMs = 0;
     DOM_ELEMENTS.sliderInner.style.transform = `translateX(-0px)`;
@@ -161,11 +166,10 @@ function observerCallback(entries, observer) {
             for (const className in animationClasses) {
                 if (target.classList.contains(className)) {
                     target.classList.add(animationClasses[className]);
+                    observer.unobserve(entry.target);
                     break;
                 }
             }
-
-            observer.unobserve(entry.target);
         }
     });
 }
@@ -181,6 +185,7 @@ function addObserverElement(elements) {
 }
 
 function updateSettingsSlider() {
+    alert('update');
     SLIDER_SETTINGS.cardWidth = document.querySelector('.card').offsetWidth;
     SLIDER_SETTINGS.gap = Number(
         getComputedStyle(document.querySelector('.slider__inner')).columnGap.replace('px', ''),
