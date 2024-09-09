@@ -17,6 +17,7 @@
         letter-spacing: 0.03em;
         line-height: 50px;
         text-transform: uppercase;
+        transition: all 0.3s;
     }
 }
 
@@ -118,6 +119,12 @@
     z-index: 3;
 }
 
+@media (hover: hover) {
+    .contribution__link:hover {
+        text-shadow: 1px 1px 1px var(--main-text-color);
+    }
+}
+
 @media (max-width: 1250px) {
     .sculpture__content {
         right: 0;
@@ -180,6 +187,10 @@
 }
 
 @media (max-width: 768px) {
+    .contribution__inner {
+        margin-bottom: 80px;
+    }
+
     .sculpture__content,
     .avatars__content {
         gap: 0;
@@ -233,6 +244,10 @@
 }
 
 @media (max-width: 500px) {
+    .contribution__inner {
+        margin-bottom: 50px;
+    }
+
     .sculpture {
         margin-bottom: 30px;
     }

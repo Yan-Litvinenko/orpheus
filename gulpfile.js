@@ -101,6 +101,10 @@ const images = () => {
         .pipe(dest('dist/assets/img'));
 };
 
+const svg = () => {
+    return src('src/assets/img/*.svg').pipe(dest('dist/assets/img'));
+};
+
 const fonts = () => {
     return src('src/fonts/*.{ttf,otf}')
         .pipe(fonter({ formats: ['woff'] }))
@@ -117,6 +121,7 @@ exports.images = images;
 exports.scripts = scripts;
 exports.styles = styles;
 exports.watching = watching;
+exports.svg = svg;
 
-exports.build = series(cleanDir, html, styles, scripts, fonts, images);
+exports.build = series(cleanDir, html, styles, scripts, fonts, images, svg);
 exports.default = parallel(html, styles, scripts, watching);

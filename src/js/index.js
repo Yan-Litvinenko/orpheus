@@ -12,29 +12,36 @@ const burger = () => {
 const slider = () => {
     const sliderInner = document.querySelector('.slider__inner');
     const cards = document.querySelectorAll('.card');
+
     const countCards = cards.length;
-    const ms = 4000;
+    const step = 10;
+    const slideTime = 4000;
 
     let acc = 0;
+    let elapsedMs = 0;
     let intervalId;
 
+    const cardWidth = cards[0].offsetWidth;
+    const gap = Number(getComputedStyle(sliderInner).columnGap.replace('px', ''));
+    const mediaQuery = window.matchMedia('(max-width: 1050px)').matches;
+
+    const transformValue = cardWidth + gap;
+    const transformValueMax = transformValue * (mediaQuery ? countCards - 1 : countCards - 3);
+
     const slide = () => {
-        const cardWidth = cards[0].offsetWidth;
-        const gap = Number(getComputedStyle(sliderInner).columnGap.replace('px', ''));
-        const mediaQuery = window.matchMedia('(max-width: 1050px)').matches;
-        const transformValue = cardWidth + gap;
-        const transformValueMax = transformValue * (mediaQuery ? countCards - 1 : countCards - 3);
+        elapsedMs += 10;
 
-        acc += transformValue;
-
-        if (acc > transformValueMax) {
-            acc = 0;
+        if (elapsedMs >= slideTime) {
+            acc += transformValue;
+            if (acc > transformValueMax) {
+                acc = 0;
+            }
+            sliderInner.style.transform = `translateX(-${acc}px)`;
+            elapsedMs = 0;
         }
-
-        sliderInner.style.transform = `translateX(-${acc}px)`;
     };
 
-    const start = () => (intervalId = setInterval(slide, ms));
+    const start = () => (intervalId = setInterval(slide, step));
     const pause = () => clearInterval(intervalId);
     const restart = () => {
         sliderInner.style.transform = `translateX(-0px)`;

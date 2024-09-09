@@ -17,6 +17,7 @@
         letter-spacing: 0.03em;
         line-height: 50px;
         text-transform: uppercase;
+        transition: all 0.3s;
     }
 }
 
@@ -106,6 +107,12 @@
     }
 }
 
+@media (hover: hover) {
+    .works__link:hover {
+        text-shadow: 1px 1px 1px var(--main-text-color);
+    }
+}
+
 @media (max-width: 1200px) {
     .card__title {
         font-size: 16px;
@@ -130,7 +137,7 @@
 
 @media (max-width: 768px) {
     .main-menu-active .works {
-        opacity: 0.4;
+        opacity: 0.2;
         z-index: -1;
     }
 
