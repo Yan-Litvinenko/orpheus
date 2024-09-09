@@ -1,5 +1,7 @@
 .works {
+    position: relative;
     transition: opacity 0.5s;
+    z-index: 1;
 
     &__inner {
         margin-bottom: 100px;
@@ -75,7 +77,8 @@
         content: '';
         display: block;
         inset: 4px;
-        opacity: 0.1;
+        mix-blend-mode: hard-light;
+        opacity: 0.2;
         position: absolute;
         z-index: 1;
     }

@@ -36,6 +36,7 @@ const SLIDER_VALUE = {
     acc: 0,
     elapsedMs: 0,
     intervalId: null,
+    windowSize: window.innerWidth - document.body.offsetWidth,
 };
 
 const OBSERVER_SETTINGS = {
@@ -86,8 +87,12 @@ DOM_ELEMENTS.sliderInner.addEventListener('mouseover', pause);
 DOM_ELEMENTS.sliderInner.addEventListener('mouseout', start);
 DOM_ELEMENTS.burger.addEventListener('click', burger);
 window.addEventListener('resize', () => {
-    restart();
-    updateSettingsSlider();
+    const windowSize = window.innerWidth - document.body.offsetWidth;
+    if (windowSize > SLIDER_VALUE.windowSize) {
+        restart();
+        updateSettingsSlider();
+        SLIDER_VALUE.windowSize = windowSize;
+    }
 });
 
 start();
@@ -118,28 +123,22 @@ function slide() {
 
         if (SLIDER_VALUE.acc > SLIDER_SETTINGS.transformValueMax()) {
             SLIDER_VALUE.acc = 0;
-            alert(`acc(${SLIDER_VALUE.acc}) > max value(${SLIDER_SETTINGS.transformValueMax()})`);
         }
 
         DOM_ELEMENTS.sliderInner.style.transform = `translateX(-${SLIDER_VALUE.acc}px)`;
         SLIDER_VALUE.elapsedMs = 0;
-
-        alert(`slide, transform: -${SLIDER_VALUE.acc}px`);
     }
 }
 
 function start() {
-    alert('start');
     pause();
     SLIDER_VALUE.intervalId = setInterval(slide, SLIDER_SETTINGS.step);
 }
 function pause() {
-    alert('pause');
     clearInterval(SLIDER_VALUE.intervalId);
 }
 
 function restart() {
-    alert('restart');
     SLIDER_VALUE.acc = 0;
     SLIDER_VALUE.elapsedMs = 0;
     DOM_ELEMENTS.sliderInner.style.transform = `translateX(-0px)`;
@@ -185,7 +184,6 @@ function addObserverElement(elements) {
 }
 
 function updateSettingsSlider() {
-    alert('update');
     SLIDER_SETTINGS.cardWidth = document.querySelector('.card').offsetWidth;
     SLIDER_SETTINGS.gap = Number(
         getComputedStyle(document.querySelector('.slider__inner')).columnGap.replace('px', ''),

@@ -8,6 +8,8 @@
         display: flex;
         gap: 0px 27px;
         margin-bottom: 32px;
+        position: relative;
+        z-index: 1;
     }
 
     &__link {
