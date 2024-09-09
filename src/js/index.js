@@ -86,6 +86,7 @@ DOM_ELEMENTS.sliderInner.addEventListener('mouseover', pause);
 DOM_ELEMENTS.sliderInner.addEventListener('mouseout', start);
 DOM_ELEMENTS.burger.addEventListener('click', burger);
 window.addEventListener('resize', () => {
+    alert('resize');
     restart();
     updateSettingsSlider();
 });
@@ -117,6 +118,7 @@ function slide() {
         SLIDER_VALUE.acc += SLIDER_SETTINGS.transformValue();
         if (SLIDER_VALUE.acc > SLIDER_SETTINGS.transformValueMax()) {
             SLIDER_VALUE.acc = 0;
+            alert(`acc(${SLIDER_VALUE.acc}) > max value(${SLIDER_SETTINGS.transformValueMax()})`);
         }
 
         DOM_ELEMENTS.sliderInner.style.transform = `translateX(-${SLIDER_VALUE.acc}px)`;
@@ -154,16 +156,16 @@ function observerCallback(entries, observer) {
 
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            const target = entry.target.classList;
+            const target = entry.target;
 
             for (const className in animationClasses) {
-                if (target.contains(className)) {
-                    target.add(animationClasses[className]);
+                if (target.classList.contains(className)) {
+                    target.classList.add(animationClasses[className]);
                     break;
                 }
-
-                observer.unobserve(entry.target);
             }
+
+            observer.unobserve(entry.target);
         }
     });
 }
