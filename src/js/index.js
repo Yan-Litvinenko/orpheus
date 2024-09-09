@@ -55,19 +55,7 @@ const OBSERVER_ELEMENTS = [
     DOM_ELEMENTS.contactsItem,
 ];
 
-const observer = new IntersectionObserver(observerCallback, OBSERVER_SETTINGS);
-
-DOM_ELEMENTS.menuElements.forEach((element) => element.addEventListener('click', burger));
-DOM_ELEMENTS.sliderInner.addEventListener('mouseover', pause);
-DOM_ELEMENTS.sliderInner.addEventListener('mouseout', start);
-DOM_ELEMENTS.burger.addEventListener('click', burger);
-window.addEventListener('resize', restart);
-
-start();
-burger();
-addObserverElement(OBSERVER_ELEMENTS);
-
-const scroll = {
+const SCROLL = {
     position: 0,
     scrollOff() {
         scroll.position = window.scrollY;
@@ -91,6 +79,17 @@ const scroll = {
     },
 };
 
+const observer = new IntersectionObserver(observerCallback, OBSERVER_SETTINGS);
+
+DOM_ELEMENTS.menuElements.forEach((element) => element.addEventListener('click', burger));
+DOM_ELEMENTS.sliderInner.addEventListener('mouseover', pause);
+DOM_ELEMENTS.sliderInner.addEventListener('mouseout', start);
+DOM_ELEMENTS.burger.addEventListener('click', burger);
+window.addEventListener('resize', restart);
+
+start();
+addObserverElement(OBSERVER_ELEMENTS);
+
 function burger() {
     const isOpen = DOM_ELEMENTS.menu.classList.contains('menu-active');
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -99,13 +98,12 @@ function burger() {
         if (isOpen) {
             DOM_ELEMENTS.menu.classList.remove('menu-active');
             DOM_ELEMENTS.main.classList.remove('main-menu-active');
-            scroll.scrollOn();
-            return;
+            SCROLL.scrollOn();
+        } else {
+            DOM_ELEMENTS.menu.classList.add('menu-active');
+            DOM_ELEMENTS.main.classList.add('main-menu-active');
+            SCROLL.scrollOff();
         }
-
-        DOM_ELEMENTS.menu.classList.add('menu-active');
-        DOM_ELEMENTS.main.classList.add('main-menu-active');
-        scroll.scrollOff();
     }
 }
 
@@ -118,7 +116,6 @@ function slide() {
             SLIDER_VALUE.acc = 0;
         }
 
-        console.log('change slide');
         DOM_ELEMENTS.sliderInner.style.transform = `translateX(-${SLIDER_VALUE.acc}px)`;
         SLIDER_VALUE.elapsedMs = 0;
     }

@@ -1,4 +1,6 @@
 .works {
+    transition: opacity 0.5s;
+
     &__inner {
         margin-bottom: 100px;
     }
