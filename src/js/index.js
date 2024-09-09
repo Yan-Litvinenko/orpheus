@@ -85,7 +85,10 @@ DOM_ELEMENTS.menuElements.forEach((element) => element.addEventListener('click',
 DOM_ELEMENTS.sliderInner.addEventListener('mouseover', pause);
 DOM_ELEMENTS.sliderInner.addEventListener('mouseout', start);
 DOM_ELEMENTS.burger.addEventListener('click', burger);
-window.addEventListener('resize', restart);
+window.addEventListener('resize', () => {
+    restart();
+    updateSettingsSlider();
+});
 
 start();
 addObserverElement(OBSERVER_ELEMENTS);
@@ -122,6 +125,7 @@ function slide() {
 }
 
 function start() {
+    pause();
     SLIDER_VALUE.intervalId = setInterval(slide, SLIDER_SETTINGS.step);
 }
 function pause() {
@@ -129,8 +133,10 @@ function pause() {
 }
 
 function restart() {
+    SLIDER_VALUE.acc = 0;
+    SLIDER_VALUE.elapsedMs = 0;
     DOM_ELEMENTS.sliderInner.style.transform = `translateX(-0px)`;
-    pause();
+
     start();
 }
 
@@ -170,4 +176,12 @@ function addObserverElement(elements) {
             observer.observe(element);
         }
     });
+}
+
+function updateSettingsSlider() {
+    SLIDER_SETTINGS.cardWidth = document.querySelector('.card').offsetWidth;
+    SLIDER_SETTINGS.gap = Number(
+        getComputedStyle(document.querySelector('.slider__inner')).columnGap.replace('px', ''),
+    );
+    SLIDER_SETTINGS.mediaQuery = window.matchMedia('(max-width: 1050px)').matches;
 }
