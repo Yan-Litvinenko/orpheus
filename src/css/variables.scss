@@ -1,7 +1,8 @@
 :root {
     --main-text-color: #fff;
-    --button-text-color: #0a0d11;
     --main-background-color: #050607;
+
+    --button-text-color: #0a0d11;
     --contribution-bg: #07090c;
     --contribution-text-color: #cccccc;
 
@@ -15,14 +16,14 @@
 
     --contribution-gradietn: linear-gradient(90deg, rgb(10, 12, 15), rgb(7, 9, 15));
 
-    --ellipse-gradient-1: radial-gradient(
+    --ellipse-top-right-gradient: radial-gradient(
         58.92% 58.37% at 18.8% 75.16%,
         rgba(60, 99, 128, 0.55) 0%,
         rgba(25, 48, 83, 0.341) 29.63%,
         rgba(15, 18, 24, 0) 100%
     );
 
-    --ellipse-gradient-2: radial-gradient(
+    --ellipse-left-center-gradient: radial-gradient(
         58.12% 110.04% at 46.74% -1.76%,
         #3c6380 0%,
         rgba(25, 48, 83, 0.62) 29.63%,

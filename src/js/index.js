@@ -1,12 +1,54 @@
+'use strict';
+
+const scroll = {
+    position: 0,
+    scrollOff() {
+        scroll.position = window.scrollY;
+        document.body.style.cssText = `
+            overflow: hidden;
+            padding-right: ${window.innerWidth - document.body.offsetWidth}px;
+            position: fixed;
+            top: -${scroll.position}px;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            `;
+        document.documentElement.style.scrollBehavior = 'unset';
+    },
+    scrollOn() {
+        document.body.style.cssText = ``;
+        window.scrollTo({
+            top: scroll.position,
+        });
+        document.documentElement.style.scrollBehavior = '';
+    },
+};
+
 const burger = () => {
     const main = document.getElementById('main');
     const burger = document.getElementById('burger');
     const menu = document.getElementById('menu');
+    const menuElements = document.querySelectorAll('.nav__item');
 
-    burger.addEventListener('click', () => {
-        menu.classList.toggle('menu-active');
-        main.classList.toggle('main-menu-active');
-    });
+    const toggleMenu = () => {
+        const isOpen = menu.classList.contains('menu-active');
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+        if (isMobile) {
+            if (isOpen) {
+                menu.classList.remove('menu-active');
+                main.classList.remove('main-menu-active');
+                scroll.scrollOn();
+            } else {
+                menu.classList.add('menu-active');
+                main.classList.add('main-menu-active');
+                scroll.scrollOff();
+            }
+        }
+    };
+
+    burger.addEventListener('click', toggleMenu);
+    menuElements.forEach((element) => element.addEventListener('click', toggleMenu));
 };
 
 const slider = () => {

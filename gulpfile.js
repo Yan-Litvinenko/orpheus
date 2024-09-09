@@ -21,6 +21,10 @@ const html = () => {
         .pipe(dest('dist'));
 };
 
+const root = () => {
+    return src(['src/*.*', '!src/*.html']).pipe(dest('dist'));
+};
+
 const styles = () => {
     return src(['src/css/*.scss', 'src/css/*.css'])
         .pipe(sass().on('error', sass.logError))
@@ -117,11 +121,12 @@ const fonts = () => {
 exports.clean = cleanDir;
 exports.fonts = fonts;
 exports.html = html;
+exports.root = root;
 exports.images = images;
 exports.scripts = scripts;
 exports.styles = styles;
 exports.watching = watching;
 exports.svg = svg;
 
-exports.build = series(cleanDir, html, styles, scripts, fonts, images, svg);
+exports.build = series(cleanDir, html, root, styles, scripts, fonts, images, svg);
 exports.default = parallel(html, styles, scripts, watching);
