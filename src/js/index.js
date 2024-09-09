@@ -92,7 +92,7 @@ const scroll = {
 };
 
 function burger() {
-    const isOpen = menu.classList.contains('menu-active');
+    const isOpen = DOM_ELEMENTS.menu.classList.contains('menu-active');
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     if (isMobile) {
