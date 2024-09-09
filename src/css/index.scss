@@ -225,6 +225,15 @@ ol {
     background-image: linear-gradient(90deg, rgb(35, 42, 63) 40%, rgba(22, 28, 42, 1));
 }
 
+.animation-observer-opacity {
+    opacity: 1;
+}
+
+.animation-observer-shift {
+    transform: translateX(0%);
+    opacity: 1;
+}
+
 @media (hover: hover) {
     .btn:hover::before {
         opacity: 0;

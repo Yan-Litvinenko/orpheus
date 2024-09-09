@@ -17,13 +17,16 @@
         letter-spacing: 0.03em;
         line-height: 50px;
         text-transform: uppercase;
+        text-wrap: nowrap;
         transition: all 0.3s;
     }
 }
 
 .slider {
+    opacity: 0;
     overflow: hidden;
     position: relative;
+    transition: opacity 2s;
 
     &::after {
         background-image: var(--slider-inner-right-side-gradient);
@@ -171,6 +174,6 @@
     }
 
     .works__link {
-        font-size: 12px;
+        font-size: 11px;
     }
 }

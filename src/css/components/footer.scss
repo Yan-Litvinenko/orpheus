@@ -8,7 +8,9 @@
     }
 
     &__title {
+        opacity: 0;
         text-align: center;
+        transition: opacity 1.5s;
     }
 
     &__text {
@@ -18,7 +20,9 @@
         letter-spacing: 0.03em;
         line-height: 50px;
         margin-bottom: 7px;
+        opacity: 0;
         text-align: center;
+        transition: opacity 2s;
     }
 }
 
@@ -29,7 +33,10 @@
     &__item {
         background-color: var(--main-background-color);
         height: 49px;
+        opacity: 0;
         position: relative;
+        transform: translateX(90%);
+        transition: all 1s;
         width: 49px;
     }
 
@@ -40,6 +47,22 @@
         height: 100%;
         width: 100%;
     }
+}
+
+.contacts__item:nth-child(1) {
+    transition-delay: 0.5s;
+}
+.contacts__item:nth-child(2) {
+    transition-delay: 1s;
+}
+.contacts__item:nth-child(3) {
+    transition-delay: 1.5s;
+}
+.contacts__item:nth-child(4) {
+    transition-delay: 2s;
+}
+.contacts__item:nth-child(5) {
+    transition-delay: 2.5s;
 }
 
 .contacts__item .gradient-border:nth-child(2)::before {
