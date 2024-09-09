@@ -113,10 +113,12 @@ function slide() {
     SLIDER_VALUE.elapsedMs += 10;
 
     if (SLIDER_VALUE.elapsedMs >= SLIDER_SETTINGS.slideTime) {
-        SLIDER_VALUE.acc += SLIDER_SETTINGS.transformValue;
-        if (SLIDER_VALUE.acc > SLIDER_SETTINGS.transformValueMax) {
+        SLIDER_VALUE.acc += SLIDER_SETTINGS.transformValue();
+        if (SLIDER_VALUE.acc > SLIDER_SETTINGS.transformValueMax()) {
             SLIDER_VALUE.acc = 0;
         }
+
+        console.log('change slide');
         DOM_ELEMENTS.sliderInner.style.transform = `translateX(-${SLIDER_VALUE.acc}px)`;
         SLIDER_VALUE.elapsedMs = 0;
     }
