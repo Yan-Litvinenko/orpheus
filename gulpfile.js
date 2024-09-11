@@ -8,10 +8,9 @@ const sass = require('gulp-sass')(require('sass'));
 const compressCSS = require('gulp-clean-css');
 const compressJS = require('gulp-uglify-es').default;
 const babel = require('gulp-babel');
-const avif = require('gulp-avif');
-const webp = require('gulp-webp');
+const avifPlugin = require('gulp-avif');
+const webpPlugin = require('gulp-webp');
 const imagemin = require('gulp-imagemin');
-const newer = require('gulp-newer');
 const fonter = require('gulp-fonter');
 const ttf2woff2 = require('gulp-ttf2woff2');
 
@@ -78,7 +77,7 @@ const watching = () => {
     );
     watch(
         ['src/assets/img'],
-        series(images, (done) => {
+        series(avif, webp, svg, imageminimize, (done) => {
             browserSync.reload();
             done();
         }),
@@ -88,25 +87,20 @@ const watching = () => {
 const cleanDir = () => {
     return src(['dist/*']).pipe(clean());
 };
+const avif = () => {
+    return src('src/assets/img/*.{png,jpg,jpeg}').pipe(avifPlugin()).pipe(dest('dist/assets/img/'));
+};
 
-const images = () => {
-    return src(['src/assets/img/*.*', '!src/assets/img/*.svg'])
-        .pipe(newer('dist/assets/images'))
-        .pipe(avif({ quality: 50 }))
-
-        .pipe(src(['src/assets/images/*.*']))
-        .pipe(newer('dist/assets/img'))
-        .pipe(webp())
-
-        .pipe(src(['src/assets/images/*.*']))
-        .pipe(newer('dist/assets/img'))
-        .pipe(imagemin())
-
-        .pipe(dest('dist/assets/img'));
+const webp = () => {
+    return src('src/assets/img/*.{png,jpg,jpeg}').pipe(webpPlugin()).pipe(dest('dist/assets/img/'));
 };
 
 const svg = () => {
-    return src('src/assets/img/*.svg').pipe(dest('dist/assets/img'));
+    return src('src/assets/img/*.svg').pipe(dest('dist/assets/img/'));
+};
+
+const imageminimize = () => {
+    return src(['dist/assets/img/*.*']).pipe(imagemin()).pipe(dest('dist/assets/img'));
 };
 
 const fonts = () => {
@@ -122,11 +116,11 @@ exports.clean = cleanDir;
 exports.fonts = fonts;
 exports.html = html;
 exports.root = root;
-exports.images = images;
 exports.scripts = scripts;
 exports.styles = styles;
 exports.watching = watching;
 exports.svg = svg;
 
-exports.build = series(cleanDir, html, root, styles, scripts, fonts, images, svg);
+exports.images = series(avif, webp, svg, imageminimize);
+exports.build = series(cleanDir, html, root, styles, scripts, fonts, series(avif, webp, svg, imageminimize));
 exports.default = parallel(html, styles, scripts, watching);
