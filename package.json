@@ -7,6 +7,7 @@
     "scripts": {
         "lint": "eslint",
         "lint:fix": "eslint --fix ./src",
+        "lint-staged": "lint-staged",
         "format": "prettier --write .",
         "prepare": "husky"
     },
