@@ -15,14 +15,23 @@ const imagemin = require('gulp-imagemin');
 const fonter = require('gulp-fonter');
 const ttf2woff2 = require('gulp-ttf2woff2');
 
+const root = () => {
+    return src(['src/*.*', '!src/*.html']).pipe(dest('dist'));
+};
+
 const html = () => {
     return src('src/*.html')
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(dest('dist'));
 };
 
-const root = () => {
-    return src(['src/*.*', '!src/*.html']).pipe(dest('dist'));
+const fonts = () => {
+    return src('src/fonts/*.{ttf,otf}')
+        .pipe(fonter({ formats: ['woff'] }))
+        .pipe(dest('dist/fonts'))
+        .pipe(src('src/fonts/*.{ttf,otf}'))
+        .pipe(ttf2woff2())
+        .pipe(dest('dist/fonts'));
 };
 
 const styles = () => {
@@ -78,7 +87,7 @@ const watching = () => {
     );
     watch(
         ['src/assets/img'],
-        series(avif, webp, svg, (done) => {
+        series(convertToAvif, convertToWebp, toDistSvg, (done) => {
             browserSync.reload();
             done();
         }),
@@ -89,44 +98,43 @@ const cleanDir = () => {
     return src(['dist/*']).pipe(clean());
 };
 
-const avif = () => {
-    return src('src/assets/img/*.{png,jpg,jpeg}')
+const deleteCompressDir = () => {
+    return src('src/assets/compress-images', { read: false, allowEmpty: true }).pipe(clean());
+};
+
+const convertToAvif = () => {
+    return src('src/assets/compress-images/*.{png,jpg,jpeg}')
         .pipe(newer('dist/assets/img/'))
         .pipe(avifPlugin())
-        .pipe(imagemin())
         .pipe(dest('dist/assets/img/'));
 };
 
-const webp = () => {
-    return src('src/assets/img/*.{png,jpg,jpeg}')
+const convertToWebp = () => {
+    return src('src/assets/compress-images/*.{png,jpg,jpeg}')
         .pipe(newer('dist/assets/img/'))
         .pipe(webpPlugin())
-        .pipe(imagemin())
         .pipe(dest('dist/assets/img/'));
 };
 
-const svg = () => {
-    return src('src/assets/img/*.svg').pipe(imagemin()).pipe(dest('dist/assets/img/'));
+const toDistSvg = () => {
+    return src('src/assets/compress-images/*.svg').pipe(imagemin()).pipe(dest('dist/assets/img/'));
 };
 
-const initImageFormat = () => {
-    return src('src/assets/img/*.{png,jpg,jpeg}')
+const toDistInitFormat = () => {
+    return src('src/assets/compress-images/*.{png,jpg,jpeg}')
         .pipe(newer('dist/assets/img/'))
-        .pipe(imagemin())
         .pipe(dest('dist/assets/img/'));
+};
+
+const compressSrcImage = () => {
+    return src('src/assets/img/*.*')
+        .pipe(newer('src/assets/compress-images/'))
+        .pipe(imagemin())
+        .pipe(dest('src/assets/compress-images/'));
 };
 
 const images = (done) => {
-    series(webp, svg, initImageFormat, avif)(done);
-};
-
-const fonts = () => {
-    return src('src/fonts/*.{ttf,otf}')
-        .pipe(fonter({ formats: ['woff'] }))
-        .pipe(dest('dist/fonts'))
-        .pipe(src('src/fonts/*.{ttf,otf}'))
-        .pipe(ttf2woff2())
-        .pipe(dest('dist/fonts'));
+    series(compressSrcImage, toDistSvg, convertToWebp, convertToAvif, toDistInitFormat, deleteCompressDir)(done);
 };
 
 exports.clean = cleanDir;
@@ -137,11 +145,13 @@ exports.scripts = scripts;
 exports.styles = styles;
 exports.watching = watching;
 exports.images = images;
+exports.compressSrcImage = compressSrcImage;
 
-exports.avif = avif;
-exports.webp = webp;
-exports.svg = svg;
-exports.initImageFormat = initImageFormat;
+exports.convertToAvif = convertToAvif;
+exports.convertToWebp = convertToWebp;
+exports.toDistSvg = toDistSvg;
+exports.toDistInitFormat = toDistInitFormat;
+exports.deleteCompressDir = deleteCompressDir;
 
 exports.build = series(cleanDir, html, root, styles, scripts, fonts, images);
 exports.default = parallel(html, styles, scripts, watching);
