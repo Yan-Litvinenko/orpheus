@@ -87,6 +87,7 @@ const watching = () => {
 const cleanDir = () => {
     return src(['dist/*']).pipe(clean());
 };
+
 const avif = () => {
     return src('src/assets/img/*.{png,jpg,jpeg}').pipe(avifPlugin()).pipe(dest('dist/assets/img/'));
 };
@@ -101,6 +102,14 @@ const svg = () => {
 
 const imageminimize = () => {
     return src(['dist/assets/img/*.*']).pipe(imagemin()).pipe(dest('dist/assets/img'));
+};
+
+const initImageFormat = () => {
+    return src('src/assets/img/*.{png,jpg,jpeg}').pipe(dest('dist/assets/img/'));
+};
+
+const images = () => {
+    return series(initImageFormat, avif, webp, svg, imageminimize)();
 };
 
 const fonts = () => {
@@ -120,7 +129,7 @@ exports.scripts = scripts;
 exports.styles = styles;
 exports.watching = watching;
 exports.svg = svg;
+exports.images = images;
 
-exports.images = series(avif, webp, svg, imageminimize);
-exports.build = series(cleanDir, html, root, styles, scripts, fonts, series(avif, webp, svg, imageminimize));
+exports.build = series(cleanDir, html, root, styles, scripts, fonts, images);
 exports.default = parallel(html, styles, scripts, watching);
