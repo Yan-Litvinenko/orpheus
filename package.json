@@ -18,9 +18,9 @@
         ]
     },
     "browserslist": [
-        "last 2 versions",
-        "> 0.5%",
-        "IE 11"
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
     ],
     "author": "Darth-Vader",
     "license": "ISC",
