@@ -39,10 +39,11 @@
         font-family: Montserrat-500;
         font-weight: 500;
         line-height: 19.5px;
-        padding: 7px 9px;
     }
 
     &__link {
+        display: block;
+        padding: 7px 9px;
         transition: text-shadow 0.3s;
     }
 }
